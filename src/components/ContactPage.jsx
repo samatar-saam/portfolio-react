@@ -275,21 +275,21 @@ export default function ContactPage() {
           <ContactInfoCard
             icon={Mail}
             title="Email"
-            value="samatar@example.com"
+            value="samatar578@example.com"
             description="Send me an email anytime"
             delay={0}
           />
           <ContactInfoCard
             icon={Phone}
             title="Phone"
-            value="+1 (555) 123-4567"
+            value="+254 72756 8271"
             description="Mon-Fri, 9am-6pm EST"
             delay={0.1}
           />
           <ContactInfoCard
             icon={MapPin}
             title="Location"
-            value="San Francisco, CA"
+            value="Kenya, Garissa"
             description="Available for remote work worldwide"
             delay={0.2}
           />

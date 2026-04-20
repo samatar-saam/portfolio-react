@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   X,
   Search,
+  Wrench,
 } from "lucide-react";
 
 const projects = [
@@ -228,7 +229,8 @@ function ProjectCard({ project, index, onClick }) {
   );
 }
 
-function ProjectModal({ project, onClose }) {
+// Maintenance Modal Component
+function MaintenanceModal({ onClose }) {
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => {
@@ -248,69 +250,130 @@ function ProjectModal({ project, onClose }) {
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+        className="relative max-w-md rounded-2xl bg-white p-6 text-center shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 rounded-full bg-white/90 p-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white"
+          className="absolute right-3 top-3 rounded-full p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <img
-          src={project.image}
-          alt={project.title}
-          className="h-64 w-full object-cover"
-        />
-
-        <div className="p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-3xl font-bold text-slate-900">{project.title}</h2>
-            <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
-              {project.category}
-            </span>
-          </div>
-
-          <p className="mb-6 text-slate-600">{project.fullDescription}</p>
-
-          <div className="mb-6">
-            <h3 className="mb-3 text-lg font-semibold text-slate-900">Key Features</h3>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {project.features.map((feature) => (
-                <div key={feature} className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm text-slate-600">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="mb-3 text-lg font-semibold text-slate-900">Technologies</h3>
-            <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
-                <span key={tech} className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-2 text-white transition-all hover:shadow-lg hover:-translate-y-0.5"
-            >
-              <ExternalLink className="h-4 w-4" />
-              Live Demo
-            </a>
+        <div className="mb-4 flex justify-center">
+          <div className="rounded-full bg-amber-100 p-3">
+            <Wrench className="h-8 w-8 text-amber-600" />
           </div>
         </div>
+
+        <h3 className="mb-2 text-xl font-bold text-slate-900">Under Maintenance</h3>
+        <p className="mb-6 text-slate-600">
+          This demo is currently being improved. Please check back soon!
+        </p>
+        <button
+          onClick={onClose}
+          className="rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-2 text-white transition-all hover:shadow-lg"
+        >
+          Got it
+        </button>
       </motion.div>
     </motion.div>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  const [showMaintenance, setShowMaintenance] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  const handleDemoClick = () => {
+    setShowMaintenance(true);
+  };
+
+  return (
+    <>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+        onClick={onClose}
+      >
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          className="relative max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={onClose}
+            className="absolute right-4 top-4 z-10 rounded-full bg-white/90 p-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white"
+          >
+            <X className="h-5 w-5" />
+          </button>
+
+          <img
+            src={project.image}
+            alt={project.title}
+            className="h-64 w-full object-cover"
+          />
+
+          <div className="p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-3xl font-bold text-slate-900">{project.title}</h2>
+              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-700">
+                {project.category}
+              </span>
+            </div>
+
+            <p className="mb-6 text-slate-600">{project.fullDescription}</p>
+
+            <div className="mb-6">
+              <h3 className="mb-3 text-lg font-semibold text-slate-900">Key Features</h3>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {project.features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-blue-500" />
+                    <span className="text-sm text-slate-600">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <h3 className="mb-3 text-lg font-semibold text-slate-900">Technologies</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span key={tech} className="rounded-full bg-blue-100 px-3 py-1 text-sm text-blue-700">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={handleDemoClick}
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-6 py-2 text-white transition-all hover:shadow-lg hover:-translate-y-0.5"
+              >
+                <ExternalLink className="h-4 w-4" />
+                Live Demo
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {showMaintenance && (
+        <MaintenanceModal onClose={() => setShowMaintenance(false)} />
+      )}
+    </>
   );
 }
 
@@ -318,6 +381,7 @@ export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showProjectModal, setShowProjectModal] = useState(false);
 
   const filteredProjects = projects.filter((project) => {
     const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
@@ -329,133 +393,147 @@ export default function ProjectsPage() {
 
   const featuredProjects = projects.filter(p => p.featured);
 
-  return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-blue-50/40 via-white to-indigo-50/30 text-slate-900">
-      <FloatingBackground />
+  const handleStartProject = () => {
+    setShowProjectModal(true);
+  };
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mb-16 text-center"
-        >
+  return (
+    <>
+      <main className="relative min-h-screen overflow-hidden bg-gradient-to-b from-blue-50/40 via-white to-indigo-50/30 text-slate-900">
+        <FloatingBackground />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          {/* Hero Section */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur-xl"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-16 text-center"
           >
-            <Code2 className="h-4 w-4" />
-            My Work
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+              className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200/80 bg-white/80 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm backdrop-blur-xl"
+            >
+              <Code2 className="h-4 w-4" />
+              My Work
+            </motion.div>
+
+            <h1 className="mb-6 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+              Featured
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
+                {" "}Projects
+              </span>
+            </h1>
+
+            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-600 sm:text-xl">
+              A collection of my best work showcasing modern frontend development,
+              creative design solutions, and technical excellence.
+            </p>
           </motion.div>
 
-          <h1 className="mb-6 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-            Featured
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 bg-clip-text text-transparent">
-              {" "}Projects
-            </span>
-          </h1>
-
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-slate-600 sm:text-xl">
-            A collection of my best work showcasing modern frontend development,
-            creative design solutions, and technical excellence.
-          </p>
-        </motion.div>
-
-        {/* Stats Section */}
-        <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
-            <div className="mb-2 text-3xl font-bold text-blue-600">{projects.length}+</div>
-            <div className="text-sm text-slate-600">Total Projects</div>
-          </div>
-          <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
-            <div className="mb-2 text-3xl font-bold text-blue-600">{featuredProjects.length}</div>
-            <div className="text-sm text-slate-600">Featured Projects</div>
-          </div>
-          <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
-            <div className="mb-2 text-3xl font-bold text-blue-600">10+</div>
-            <div className="text-sm text-slate-600">Technologies Used</div>
-          </div>
-          <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
-            <div className="mb-2 text-3xl font-bold text-blue-600">100%</div>
-            <div className="text-sm text-slate-600">Client Satisfaction</div>
-          </div>
-        </div>
-
-        {/* Search and Filter */}
-        <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
-                  selectedCategory === category
-                    ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md"
-                    : "border border-blue-200/70 bg-white/80 text-slate-600 hover:bg-blue-50"
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          {/* Stats Section */}
+          <div className="mb-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
+              <div className="mb-2 text-3xl font-bold text-blue-600">{projects.length}+</div>
+              <div className="text-sm text-slate-600">Total Projects</div>
+            </div>
+            <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
+              <div className="mb-2 text-3xl font-bold text-blue-600">{featuredProjects.length}</div>
+              <div className="text-sm text-slate-600">Featured Projects</div>
+            </div>
+            <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
+              <div className="mb-2 text-3xl font-bold text-blue-600">10+</div>
+              <div className="text-sm text-slate-600">Technologies Used</div>
+            </div>
+            <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-6 text-center backdrop-blur-xl">
+              <div className="mb-2 text-3xl font-bold text-blue-600">100%</div>
+              <div className="text-sm text-slate-600">Client Satisfaction</div>
+            </div>
           </div>
 
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search projects..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="rounded-full border border-blue-200/70 bg-white/80 py-2 pl-10 pr-4 text-sm text-slate-700 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 backdrop-blur-xl"
-            />
-          </div>
-        </div>
+          {/* Search and Filter */}
+          <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md"
+                      : "border border-blue-200/70 bg-white/80 text-slate-600 hover:bg-blue-50"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
 
-        {/* Projects Grid */}
-        {filteredProjects.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                onClick={() => setSelectedProject(project)}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="rounded-full border border-blue-200/70 bg-white/80 py-2 pl-10 pr-4 text-sm text-slate-700 placeholder:text-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 backdrop-blur-xl"
               />
-            ))}
+            </div>
           </div>
-        ) : (
-          <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-12 text-center backdrop-blur-xl">
-            <Code2 className="mx-auto mb-4 h-12 w-12 text-slate-400" />
-            <h3 className="mb-2 text-xl font-semibold text-slate-900">No projects found</h3>
-            <p className="text-slate-600">Try adjusting your search or filter criteria</p>
-          </div>
+
+          {/* Projects Grid */}
+          {filteredProjects.length > 0 ? (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {filteredProjects.map((project, index) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  index={index}
+                  onClick={() => setSelectedProject(project)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="rounded-2xl border border-blue-200/70 bg-white/80 p-12 text-center backdrop-blur-xl">
+              <Code2 className="mx-auto mb-4 h-12 w-12 text-slate-400" />
+              <h3 className="mb-2 text-xl font-semibold text-slate-900">No projects found</h3>
+              <p className="text-slate-600">Try adjusting your search or filter criteria</p>
+            </div>
+          )}
+
+          {/* CTA Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 p-8 text-center text-white shadow-xl sm:p-12"
+          >
+            <h2 className="mb-4 text-3xl font-bold">Have a Project in Mind?</h2>
+            <p className="mb-6 text-lg opacity-90">
+              Let's collaborate and bring your ideas to life with modern web technologies.
+            </p>
+            <button
+              onClick={handleStartProject}
+              className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-semibold text-blue-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              Start a Project
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Project Details Modal */}
+        {selectedProject && (
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
         )}
 
-        {/* CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-16 rounded-2xl bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 p-8 text-center text-white shadow-xl sm:p-12"
-        >
-          <h2 className="mb-4 text-3xl font-bold">Have a Project in Mind?</h2>
-          <p className="mb-6 text-lg opacity-90">
-            Let's collaborate and bring your ideas to life with modern web technologies.
-          </p>
-          <button className="group inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-semibold text-blue-600 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-            Start a Project
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </button>
-        </motion.div>
-      </div>
-
-      {/* Modal */}
-      {selectedProject && (
-        <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
-      )}
-    </main>
+        {/* "Start a Project" Maintenance Modal */}
+        {showProjectModal && (
+          <MaintenanceModal onClose={() => setShowProjectModal(false)} />
+        )}
+      </main>
+    </>
   );
 }

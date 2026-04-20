@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 
 const stats = [
-  { value: "3+", label: "Years Experience", icon: Briefcase, description: "Professional development" },
+  { value: "4+", label: "Months Experience", icon: Briefcase, description: "Professional development" },
   { value: "20+", label: "Projects Completed", icon: Code2, description: "From startups to enterprises" },
   { value: "100%", label: "Client Satisfaction", icon: Heart, description: "Happy clients worldwide" },
   { value: "40%", label: "Performance Boost", icon: Zap, description: "Average optimization gain" },
@@ -40,7 +40,7 @@ const experiences = [
   {
     title: "Senior Frontend Developer",
     company: "Tech Innovations Inc.",
-    period: "2022 - Present",
+    period: "2025 - Present",
     location: "Remote",
     description: "Leading frontend development for enterprise applications, mentoring junior developers, and implementing modern UI architectures.",
     achievements: [
@@ -54,8 +54,8 @@ const experiences = [
   {
     title: "React Developer",
     company: "Digital Creative Agency",
-    period: "2020 - 2022",
-    location: "San Francisco, CA",
+    period: "2025 - 2026",
+    location: "Kenya, Garissa",
     description: "Developed responsive web applications and interactive user interfaces for clients across various industries.",
     achievements: [
       "Built 15+ client projects with 100% satisfaction rate",
@@ -68,8 +68,8 @@ const experiences = [
   {
     title: "Frontend Intern",
     company: "Startup Hub",
-    period: "2019 - 2020",
-    location: "New York, NY",
+    period: "2025 - 2026",
+    location: "Kenya, Garissa",
     description: "Assisted in developing and maintaining web applications while learning modern frontend practices.",
     achievements: [
       "Contributed to 5 production applications",
@@ -83,12 +83,12 @@ const experiences = [
 
 const education = [
   {
-    degree: "Bachelor of Science in Computer Science",
-    school: "University of Technology",
-    period: "2016 - 2020",
-    location: "Boston, MA",
+    degree: "Bachelor of Information Science",
+    school: "Garissa university",
+    period: "2025 - 2026",
+    location: "Kenya, Garissa",
     achievements: [
-      "Graduated with Honors (Cum Laude)",
+      "Graduated with Honors (Garissa University)",
       "Web Development Club President",
       "Dean's List recipient (4 semesters)",
       "Capstone Project: AI-Powered Web Application"
@@ -106,7 +106,7 @@ const achievements = [
 
 const skills = [
   { name: "React.js", level: 90, icon: "⚛️", category: "Frontend" },
-  { name: "TypeScript", level: 85, icon: "📘", category: "Frontend" },
+  // { name: "TypeScript", level: 85, icon: "📘", category: "Frontend" },
   { name: "Tailwind CSS", level: 92, icon: "🎨", category: "Styling" },
   { name: "Framer Motion", level: 88, icon: "✨", category: "Animation" },
   { name: "JavaScript", level: 88, icon: "📜", category: "Frontend" },
@@ -290,11 +290,11 @@ export default function AboutPage() {
             <div className="mt-6 flex flex-wrap gap-4">
               <div className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-blue-500" />
-                <span className="text-sm text-slate-600">samatar@example.com</span>
+                <span className="text-sm text-slate-600">samatar578@example.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="h-5 w-5 text-blue-500" />
-                <span className="text-sm text-slate-600">San Francisco, CA</span>
+                <span className="text-sm text-slate-600">Kenya,Garissa</span>
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-blue-500" />
@@ -310,7 +310,7 @@ export default function AboutPage() {
               interfaces that not only look beautiful but also feel intuitive and
               perform flawlessly."
             </p>
-            <p className="font-semibold text-slate-900">— Samatar Mohamed</p>
+            <p className="font-semibold text-slate-900"> Samatar Mohamed</p>
           </div>
         </motion.div>
 

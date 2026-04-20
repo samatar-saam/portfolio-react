@@ -19,9 +19,9 @@ const services = [
 ];
 
 const contactInfo = [
-  { icon: Mail, text: "samatar@example.com", href: "mailto:samatar@example.com" },
-  { icon: Phone, text: "+1 (555) 123-4567", href: "tel:+15551234567" },
-  { icon: MapPin, text: "San Francisco, CA", href: "#" },
+  { icon: Mail, text: "samatar578@example.com", href: "mailto:samatar@example.com" },
+  { icon: Phone, text: "+254 727568271", href: "" },
+  { icon: MapPin, text: "Kenya, Garissa", href: "#" },
   { icon: Clock, text: "Mon-Fri, 9am-6pm EST", href: "#" },
 ];
 
